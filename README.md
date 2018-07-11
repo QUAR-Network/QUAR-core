@@ -24,9 +24,9 @@ Stats
 
 Block rewards
 -------------
-###### 0-1: 125,000
-###### 1-144: 5 QUAR
-###### 145-1250000: 20
+###### Blocks 0-1: 125,000 QUAR
+###### Blocks 1-144: 5 QUAR
+###### Blocks 145-1250000: 20 QUAR
 
 POW/POS Distibution
 -------------------

@@ -128,7 +128,7 @@ public:
         vSeeds.push_back(CDNSSeedData("206.189.26.208", "95.179.159.181"));
 
         // QUAR addresses start with 'R'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,28);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,58);
         // QUAR script addresses start with '7'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,87);
         // QUAR private keys start with 'E'
