@@ -1294,7 +1294,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState &state, const C
             return state.DoS(0, false, REJECT_NONSTANDARD, "bad-txns-too-many-sigops", false,
                 strprintf("%d", nSigOps));
 
-        CAmount mempoolRejectFee = pool.GetMinFee(GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000).GetFee(nSize);
+        CAmount mempoolRejectFee = pool.GetMinFee(GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 30000).GetFee(nSize);
         if (mempoolRejectFee > 0 && nModifiedFees < mempoolRejectFee) {
             return state.DoS(0, false, REJECT_INSUFFICIENTFEE, "mempool min fee not met", false, strprintf("%d < %d", nFees, mempoolRejectFee));
         } else if (GetBoolArg("-relaypriority", DEFAULT_RELAYPRIORITY) && nModifiedFees < ::minRelayTxFee.GetFee(nSize) && !AllowFree(entry.GetPriority(chainActive.Height() + 1))) {
@@ -1544,7 +1544,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState &state, const C
 
         // trim mempool and check if tx was trimmed
         if (!fOverrideMempoolLimit) {
-            LimitMempoolSize(pool, GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000, GetArg("-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY) * 60 * 60);
+            LimitMempoolSize(pool, GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 30000, GetArg("-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY) * 60 * 60);
             if (!pool.exists(hash))
                 return state.DoS(0, false, REJECT_INSUFFICIENTFEE, "mempool full");
         }
@@ -1775,14 +1775,17 @@ CAmount GetTestBlockReward(int nPrevHeight)
     CAmount blockReward;
     if (nPrevHeight <= 144){
         blockReward = 5;   //instamine protection
-    } else if (nPrevHeight <= 1250000){
+    } else if (nPrevHeight <= 2){
+        blockReward = 5;
+    } else if (nPrevHeight <= 144){
         blockReward = 20;
-    } else if (nPrevHeight <= 10000000){
+    } else if (nPrevHeight <= 1250000){
         blockReward =  0.0000001;
     } else {
         blockReward =  0.0000001;
     }
 }
+//all for test purposes (dont pay attention to the testnet stuff;))
 CAmount GetMainBlockReward(int nPrevHeight) {
     if (nPrevHeight == 0)
     {
@@ -3047,9 +3050,9 @@ bool static FlushStateToDisk(CValidationState &state, FlushStateMode mode) {
     // The cache is over the limit, we have to write now.
     bool fCacheCritical = mode == FLUSH_STATE_IF_NEEDED && cacheSize > nCoinCacheUsage;
     // It's been a while since we wrote the block index to disk. Do this frequently, so we don't need to redownload after a crash.
-    bool fPeriodicWrite = mode == FLUSH_STATE_PERIODIC && nNow > nLastWrite + (int64_t)DATABASE_WRITE_INTERVAL * 1000000;
+    bool fPeriodicWrite = mode == FLUSH_STATE_PERIODIC && nNow > nLastWrite + (int64_t)DATABASE_WRITE_INTERVAL * 30000;
     // It's been very long since we flushed the cache. Do this infrequently, to optimize cache usage.
-    bool fPeriodicFlush = mode == FLUSH_STATE_PERIODIC && nNow > nLastFlush + (int64_t)DATABASE_FLUSH_INTERVAL * 1000000;
+    bool fPeriodicFlush = mode == FLUSH_STATE_PERIODIC && nNow > nLastFlush + (int64_t)DATABASE_FLUSH_INTERVAL * 30000;
     // Combine all conditions that result in a full cache flush.
     bool fDoFullFlush = (mode == FLUSH_STATE_ALWAYS) || fCacheLarge || fCacheCritical || fPeriodicFlush || fFlushForPrune;
     // Write blocks and block index to disk.
@@ -3096,7 +3099,7 @@ bool static FlushStateToDisk(CValidationState &state, FlushStateMode mode) {
             return AbortNode(state, "Failed to write to coin database");
         nLastFlush = nNow;
     }
-    if (fDoFullFlush || ((mode == FLUSH_STATE_ALWAYS || mode == FLUSH_STATE_PERIODIC) && nNow > nLastSetChain + (int64_t)DATABASE_WRITE_INTERVAL * 1000000)) {
+    if (fDoFullFlush || ((mode == FLUSH_STATE_ALWAYS || mode == FLUSH_STATE_PERIODIC) && nNow > nLastSetChain + (int64_t)DATABASE_WRITE_INTERVAL * 30000)) {
         // Update best block in wallet (so we can detect restored wallets).
         GetMainSignals().SetBestChain(chainActive.GetLocator());
         nLastSetChain = nNow;
@@ -3470,7 +3473,7 @@ static bool ActivateBestChainStep(CValidationState& state, const CChainParams& c
 
     if (fBlocksDisconnected) {
         mempool.removeForReorg(pcoinsTip, chainActive.Tip()->nHeight + 1, STANDARD_LOCKTIME_VERIFY_FLAGS);
-        LimitMempoolSize(mempool, GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000, GetArg("-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY) * 60 * 60);
+        LimitMempoolSize(mempool, GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 30000, GetArg("-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY) * 60 * 60);
     }
     mempool.check(pcoinsTip);
 
@@ -3587,7 +3590,7 @@ bool InvalidateBlock(CValidationState& state, const Consensus::Params& consensus
         }
     }
 
-    LimitMempoolSize(mempool, GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000, GetArg("-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY) * 60 * 60);
+    LimitMempoolSize(mempool, GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 30000, GetArg("-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY) * 60 * 60);
 
     // The resulting new best tip may not be in setBlockIndexCandidates anymore, so
     // add it again.
@@ -4542,7 +4545,7 @@ bool CVerifyDB::VerifyDB(const CChainParams& chainparams, CCoinsView *coinsview,
 
     // Verify blocks in the best chain
     if (nCheckDepth <= 0)
-        nCheckDepth = 1000000000; // suffices until the year 19000
+        nCheckDepth = 30000000; // suffices until the year 19000
     if (nCheckDepth > chainActive.Height())
         nCheckDepth = chainActive.Height();
     nCheckLevel = std::max(0, std::min(4, nCheckLevel));
@@ -5640,7 +5643,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         {
             boost::this_thread::interruption_point();
 
-            if (addr.nTime <= 100000000 || addr.nTime > nNow + 10 * 60)
+            if (addr.nTime <= 3000000 || addr.nTime > nNow + 10 * 60)
                 addr.nTime = nNow - 5 * 24 * 60 * 60;
             pfrom->AddAddressKnown(addr);
             bool fReachable = IsReachable(addr);
@@ -6636,7 +6639,7 @@ bool SendMessages(CNode* pto)
             // RPC ping request by user
             pingSend = true;
         }
-        if (pto->nPingNonceSent == 0 && pto->nPingUsecStart + PING_INTERVAL * 1000000 < GetTimeMicros()) {
+        if (pto->nPingNonceSent == 0 && pto->nPingUsecStart + PING_INTERVAL * 30000 < GetTimeMicros()) {
             // Ping automatically sent as a latency probe & keepalive.
             pingSend = true;
         }
@@ -6912,7 +6915,7 @@ bool SendMessages(CNode* pto)
 
         // Detect whether we're stalling
         nNow = GetTimeMicros();
-        if (!pto->fDisconnect && state.nStallingSince && state.nStallingSince < nNow - 1000000 * BLOCK_STALLING_TIMEOUT) {
+        if (!pto->fDisconnect && state.nStallingSince && state.nStallingSince < nNow - 30000 * BLOCK_STALLING_TIMEOUT) {
             // Stalling only triggers when the block download window cannot move. During normal steady state,
             // the download window should be much larger than the to-be-downloaded set of blocks, so disconnection
             // should only happen during initial block download.
