@@ -1794,7 +1794,7 @@ CAmount GetMainBlockReward(int nPrevHeight) {
     if (nPrevHeight == 1) {
         return 125000 * COIN; //premine
     }
-    CAmount blockReward;
+    CAmount blockReward;                                       //ignore, the guy who built the code screwed up and i cant get rid of it easily but it dosn't work anyway
     if (nPrevHeight <= 144){
         blockReward = 5;   //instamine protection
     } else if (nPrevHeight <= 1250000){
