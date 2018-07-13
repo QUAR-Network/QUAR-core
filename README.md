@@ -18,15 +18,8 @@ Stats
 ###### Block-Reward: 20 QUAR
 ###### Max-Supply: 25,000,000 QUAR
 ###### POW-Hashing-Algo: X16s
-###### Instamine-protection: 2 days
-###### Masternode-Collateral: 2000 QUAR
+###### Masternode-Collateral: 3000 QUAR
 ###### Dev-fund: 0.5%
-
-Block rewards
--------------
-###### Blocks 0-1: 125,000 QUAR
-###### Blocks 1-144: 5 QUAR
-###### Blocks 145-1250000: 20 QUAR
 
 POW/POS Distibution
 -------------------
