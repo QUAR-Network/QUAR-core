@@ -21,7 +21,7 @@ Stats
 ###### Masternode-Collateral: 3000 QUAR
 ###### Dev-fund: 0.5%
 
-POW/POS Distibution
+POW/Masternode Distibution
 -------------------
 ###### Initial: 50/50
 ###### After-6-months: 25/75
@@ -30,10 +30,10 @@ POW/POS Distibution
 Ports
 -----
 Mainet:
-###### Defult: 98987
+###### Defult: 18989
 ###### RPC: 97978
 Testnet
-###### Defult: 9859
+###### Defult: 14151
 ###### RPC: 43432
 
 License
