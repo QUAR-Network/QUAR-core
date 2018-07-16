@@ -25,7 +25,6 @@ POW/Masternode Distibution
 -------------------
 ###### Initial: 50/50
 ###### After-6-months: 25/75
-###### After-12-months: 100% POS
 
 Ports
 -----
