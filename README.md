@@ -34,7 +34,7 @@ Addnodes
 your wallet should connect and scnc automaticly although if it dosn't try adding these nodes into the wallet configueration file using `addnode=(selected ip)
 ###### 206.189.26.208
 ###### 95.179.153.42
-###### 123.48.112.75
+###### 37.187.144.227
 ###### 159.94.46.111
 ###### 71.98.76.48
 ###### 195.164.246.183
