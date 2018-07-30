@@ -13,7 +13,7 @@ processing system that will pave the way for the mainstream adoption of crpytocu
 
 Stats
 ------
-###### Ticker: QUAR
+##### Ticker: QUAR
 ###### Block-Time: 3 minutes
 ###### Block-Reward: 20 QUAR
 ###### Max-Supply: 25,000,000 QUAR
@@ -21,19 +21,18 @@ Stats
 ###### Masternode-Collateral: 3000 QUAR
 ###### Dev-fund: 0.5%
 
-POW/POS Distibution
+POW/Masternode Distibution
 -------------------
 ###### Initial: 50/50
 ###### After-6-months: 25/75
-###### After-12-months: 100% POS
 
 Ports
 -----
 Mainet:
-###### Defult: 98987
+###### Defult: 18989
 ###### RPC: 97978
 Testnet
-###### Defult: 9859
+###### Defult: 14151
 ###### RPC: 43432
 
 License
