@@ -19,12 +19,28 @@ Stats
 ###### Max-Supply: 25,000,000 QUAR
 ###### POW-Hashing-Algo: X16s
 ###### Masternode-Collateral: 3000 QUAR
+###### 2 Day Instamine protection: Block Reward = 5 QUAR
 ###### Dev-fund: 0.5%
 
 POW/Masternode Distibution
 -------------------
 ###### Initial: 50/50
 ###### After-6-months: 25/75
+<<<<<<< HEAD
+=======
+
+Addnodes
+--------
+your wallet should connect and scnc automaticly although if it dosn't try adding these nodes into the wallet configueration file using `addnode=(selected ip)
+###### 206.189.26.208
+###### 95.179.153.42
+###### 123.48.112.75
+###### 159.94.46.111
+###### 71.98.76.48
+###### 195.164.246.183
+###### 25.114.9.84
+
+>>>>>>> 0408109e34b09e79606fe196a5d0c0b9fa99bc9a
 
 Ports
 -----
