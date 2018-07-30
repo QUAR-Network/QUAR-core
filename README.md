@@ -13,7 +13,7 @@ processing system that will pave the way for the mainstream adoption of crpytocu
 
 Stats
 ------
-##### Ticker: QUAR
+###### Ticker: QUAR
 ###### Block-Time: 3 minutes
 ###### Block-Reward: 20 QUAR
 ###### Max-Supply: 25,000,000 QUAR
