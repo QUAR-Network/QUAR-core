@@ -125,7 +125,7 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x0000005017ebbb93a88be2a85f36cb8926eff3f90324fdf628ce7f2133ba729e"));
         assert(genesis.hashMerkleRoot == uint256S("0xd6367bc350cc55fce8c074b39b1e2fa9e85f3544f6bbdb871498c2847a51d3bb"));
 
-        vSeeds.push_back(CDNSSeedData("206.189.26.208", "95.179.159.181"));
+        vSeeds.push_back(CDNSSeedData("seed.QUAR.com", "seeds.QUAR.com"));
 
         // QUAR addresses start with 'R'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,58);
