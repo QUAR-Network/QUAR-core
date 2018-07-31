@@ -37,6 +37,8 @@ your wallet should connect and sync automaticly although if it dosn't try adding
 ###### 37.187.144.227
 ###### 195.164.246.183
 ###### 25.114.9.84
+###### 46.105.55.113
+###### 173.212.247.217
 
 Ports
 -----
