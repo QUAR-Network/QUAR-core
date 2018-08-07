@@ -43,11 +43,9 @@ your wallet should connect and sync automaticly although if it dosn't try adding
 Ports
 -----
 Mainet:
-###### Defult: 18989
-###### RPC: 97978
-Testnet
-###### Defult: 14151
-###### RPC: 43432
+###### Defult: 39393
+###### RPC: 39394
+
 
 License
 -------
