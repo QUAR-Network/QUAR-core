@@ -1,0 +1,6 @@
+usr/local/bin/QUAR-qt usr/bin
+share/pixmaps/QUAR32.xpm usr/share/pixmaps
+share/pixmaps/QUAR16.xpm usr/share/pixmaps
+share/pixmaps/QUAR128.png usr/share/pixmaps
+debian/QUAR-qt.desktop usr/share/applications
+debian/QUAR-qt.protocol usr/share/kde4/services/
